@@ -1,0 +1,29 @@
+@import './styles/variable';
+@import './styles/common.scss';
+
+.app {
+  text-align: center;
+  width: 100%;
+  height: 100vh;
+
+  header {
+    padding: 1rem;
+    height: 72px;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    background-color: #F8F8F8;
+    height: calc(100% - 72px);
+    &__search {
+      flex: 1;
+      align-self: center;
+    }
+    &__stats {
+      border-left: 1px solid $dark;
+      flex: 3;
+    }
+  }
+}

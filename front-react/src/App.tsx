@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from 'react';
+import './App.scss';
+import SearchForm from './pages/search-from/SearchForm';
+import Stats from './pages/stats/Stats';
+
+
+const emptyMetrics: any = {
+  metrics: [],
+  serial: ''
+}
+export const metricsContext = React.createContext(emptyMetrics)
+
+const Reducer = (state: any, action: any) => {
+  switch (action.type) {
+    case "UPDATE_METRICS":
+      return {
+        metrics: action.payload.metrics,
+        serial: action.payload.serial,
+      };
+    default:
+      return state;
+  }
+}
 
 function App() {
+  const [state, dispatch] = useReducer(Reducer, emptyMetrics);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className='app'>
+      <header className='bg-secondary'>
+        <h1 className='no-margin text-primary'>Plug'Heur Exercice</h1>
       </header>
+      <metricsContext.Provider value={{ state, dispatch }}>
+        <div className="app__content">
+          <div className='app__content__search'><SearchForm /></div>
+          <div className='app__content__stats'><Stats /></div>
+        </div>
+      </metricsContext.Provider>
     </div>
   );
 }

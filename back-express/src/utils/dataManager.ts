@@ -36,8 +36,9 @@ export class DataManager {
         return this.data
         .filter(metric => metric[SERIAL_INDEX] === serialNumber)
         .map((index) => {
-            index.slice(SERIAL_INDEX, 1);
-            return index;
+            const copy = [...index]
+            copy.splice(SERIAL_INDEX, 1)
+            return copy;
         })
     }
 
